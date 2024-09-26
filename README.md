@@ -15,6 +15,8 @@ Se han completado todas las tareas solicitadas de la **Práctica 2** para la asi
 [![NumPy](https://img.shields.io/badge/NumPy-%23013243?style=for-the-badge&logo=numpy)](Link_To_Your_NumPy_Page)
 [![OpenCV](https://img.shields.io/badge/OpenCV-%23FD8C00?style=for-the-badge&logo=opencv)](Link_To_Your_OpenCV_Page)
 [![Matplotlib](https://img.shields.io/badge/Matplotlib-%43FF6400?style=for-the-badge&logo=matplotlib&logoColor=white)](Link_To_Your_Matplotlib_Page)
+[![Mediapipe](https://img.shields.io/badge/Mediapipe-%23D9D9D9?style=for-the-badge&logo=mediapipe)](Link_To_Your_Mediapipe_Page)
+[![Pygame](https://img.shields.io/badge/Pygame-%23223B57?style=for-the-badge&logo=pygame)](Link_To_Your_Pygame_Page)
 
 
 ---
@@ -50,34 +52,12 @@ Tras estos pasos debería poder ejecutar el proyecto localmente
 
 TAREA: Realiza la cuenta de píxeles blancos por filas (en lugar de por columnas). Determina el máximo para filas y columnas (uno para cada) y muestra el número de filas con un número de píxeles blancos mayor o igual que 0.95*máximo.
 
-<table align="center">
-   <td width="50%">
-     <h3 align="center">♟️ Tablero de ajedrez</h3>
-      <div align="center">
-      <img src="https://i.imgur.com/21hDUZE.png" width="400" height="355" alt="Tablero de ajedrez"> 
-   </td>
-   <td width="50%">
-      <h3 align="center">♟️ Tablero de ajedrez verde</h3>
-      <div align="center">                                       
-      <img src="https://i.imgur.com/5oavwa0.png" width="400" height="355" alt="Tablero de ajedrez">
-   <br>                                                 
-</table>
-
-A continuación, se muestra un fragmento de código que lo ilustra:
-
-```python
-def aplicar_color_casilla(color_img, i, j, tamaño_casilla, color=255):
-    if (i + j) % 2 == 0:
-        color_img[i * tamaño_casilla:(i + 1) * tamaño_casilla, j * tamaño_casilla:(j + 1) * tamaño_casilla] = color
-```
 
 ### Tarea 2 Umbralizado a la imagen de Sobel
 
 TAREA: Aplica umbralizado a la imagen resultante de Sobel (valores 0 a 255 y convertida a 8 bits por ejemplo sobel8 = np.uint8(sobel)), y posteriormente realiza el conteo por filas y columnas similar al realizado en el ejemplo con la salida de Canny. Calcula los máximos por filas y columnas, y determina las filas y columnas por encima del 0.95*máximo. Remarca con alguna primitiva gráfica dichas filas y columnas sobre la imagen ¿Cómo se comparan los resultados obtenidos a partir de Sobel y Canny?
 
-<table align="center">
-   <td><img src="https://github.com/user-attachments/assets/7cee482b-4119-4ab1-89db-09c13c095bbd" width="200" height="280" ></td>
-</table>
+
 
 ### Tarea 3 Demostrador que captura las imágenes de la cámara
 
@@ -89,9 +69,31 @@ TAREA: Proponer un demostrador que capture las imágenes de la cámara, y les pe
 TAREA: Tras ver el video de  Virtual air guitar decidimos plantear una reinterpretación de la parte de procesamiento de la imagen, donde simulamos un piano virtual en el aire, donde el usuario usando
 el movimiendo de sus dedos puede tocar el piano, para ello partimos de un codigo de partida para detectar las manos [Medium MediaPipe](https://lvimuth.medium.com/hand-detection-in-python-using-opencv-and-mediapipe-30c7b54f5ff4) y a partir de ahi desarrollamos todo lo demas para desarrollar la tarea.
 
-<img src="https://i.imgur.com/6RGdsIV.gif" alt="GIF de ejemplo">
+<div align="center">
+   <img src="https://github.com/user-attachments/assets/16da3cc9-6f11-4c6f-a6c7-b2cd35e95779" width="420" height="240">
+</div>
 
-asdasd
+Aqui vemos un pequeño fragmento del codigo que se encarga del control de las manos para hacer sonar el piano:
+
+```python
+if is_piano_posture(fingers):
+   if len(fingers) >= 8:
+      for i in range(1, 9):
+         if fingers[i] == 1:
+            if not sustained_notes[i - 1]:
+               play_sound(i, sustained=True)
+               sustained_notes[i - 1] = True  # Marcar nota como sostenida
+               zone_states[i - 1] = True  # Activar estado visual
+            else:
+               sustained_notes[i - 1] = False  # Resetear estado al bajar el dedo
+               zone_states[i - 1] = False  # Desactivar estado visual
+         else:
+            x, y = handLms[8][1], handLms[8][2]
+            current_zone = min(max((x // (frame.shape[1] // 8)) + 1, 1), 8)
+            play_sound(current_zone)
+            zone_states[current_zone - 1] = True  
+```
+
 
 ---
 
