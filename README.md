@@ -49,7 +49,7 @@ Tras estos pasos debería poder ejecutar el proyecto localmente
 
 # Tarea 1 Máximo filas y columnas de píxeles blancos 
 
-TAREA: Realiza la cuenta de píxeles blancos por filas (en lugar de por columnas). Determina el máximo para filas y columnas (uno para cada) y muestra el número de filas con un número de píxeles blancos mayor o igual que 0.95*máximo.
+TAREA: Realizar la cuenta de píxeles blancos por filas (en lugar de por columnas). Determinar el máximo para filas y columnas (uno para cada) y muestra el número de filas con un número de píxeles blancos mayor o igual que 0.95*máximo.
 
 ## Función Principal: CannyToRowPlot(canny, text)
 ```python
@@ -90,7 +90,8 @@ def CannyToRowPlot(canny):
     print(f"Valor máximo de píxeles blancos por fila: {maxfil}")
     print(f"Número de filas con más del 95% del valor máximo: {len(filas_con_maximos)}")
     print(f"Posiciones de las filas con más del 95% del valor máximo: {filas_con_maximos}")
-``` 
+```
+
 Esta función recibe dos parámetros:
 
    - canny: Una imagen binaria (generalmente una imagen resultante de la aplicación del algoritmo de Canny) que contiene píxeles blancos (255) que representan los bordes detectados.
@@ -100,7 +101,7 @@ Esta función recibe dos parámetros:
    - Se calcula la suma de los valores de píxeles por cada fila de la imagen usando la función cv2.reduce. El resultado es un vector de valores que representa la cantidad total de píxeles blancos por fila.
      
 ## Normalización del valor de cada fila:
-   - El conteo de píxeles blancos se normaliza dividiendo entre el producto de 255 (valor de píxel blanco) y el número de columnas de la imagen, obteniendo así el porcentaje de píxeles blancos por cada fila de la        imagen.
+   - El conteo de píxeles blancos se normaliza dividiendo entre el producto de 255 (valor de píxel blanco) y el número de columnas de la imagen, obteniendo así el porcentaje de píxeles blancos por cada fila de la imagen.
      
 ## Detección de filas con máximo porcentaje de bordes:
    - Se calcula el valor máximo de píxeles blancos en una fila (maxfil) y se establece un umbral del 95% de ese valor máximo.
