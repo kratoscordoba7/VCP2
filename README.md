@@ -1,6 +1,6 @@
 <h1 align="center">🌟 Práctica 2 - Visión por Computador (Curso 2024/2025)</h1>
 
-<img align="left" width="200" height="160" src="https://github.com/user-attachments/assets/4734d432-0024-4c4b-b7c9-d80cd840820b"></a>
+<img align="left" width="200" height="160" src="img/octo_cat.png"></a>
 Se han completado todas las tareas solicitadas de la **Práctica 2** para la asignatura **Visión por Computador**. Funciones básicas de OpenCV.
 
 *Trabajo realizado por*:
@@ -73,7 +73,7 @@ Aquí tienes una versión mejorada de la expresión y una respuesta que podrías
 <br>
 
 <div align="center">
-   <img src="https://github.com/user-attachments/assets/b932ae22-9dec-434a-bb2c-fb6b712d5a55" width="680" height="400">
+   <img src="img/mono_sobel.png" width="680" height="400">
 </div>
 
 <br>
@@ -82,7 +82,7 @@ Aquí tienes una versión mejorada de la expresión y una respuesta que podrías
 Al comparar los resultados obtenidos de las imágenes procesadas por Sobel y Canny, se observa que el método Canny produce un mayor número de filas y columnas con píxeles no nulos en comparación con Sobel. Además, los histogramas de Sobel muestran una distribución más homogénea en las filas y columnas, mientras que en Canny se evidencia una mayor disparidad en la distribución de los valores. Esta diferencia sugiere que Canny es más eficaz para resaltar características en la imagen, proporcionando un mayor contraste en la detección de bordes en comparación con Sobel.
 
 <div align="center">
-   <img src="https://github.com/user-attachments/assets/32cdad5f-6669-435a-a2c0-0214919dcd65" width="620" height="440">
+   <img src="img/grafico_sobel.png" width="620" height="440">
 </div>
 
 <br>
@@ -122,7 +122,7 @@ Después de ver el video de **Virtual Air Guitar**, decidimos reinterpretar la p
 
 
 <div align="center">
-   <img src="https://github.com/user-attachments/assets/16da3cc9-6f11-4c6f-a6c7-b2cd35e95779" width="420" height="240">
+   <img src="img/air_piano.png" width="420" height="240">
 </div>
 
 A continuación, presentamos un pequeño fragmento del código responsable del control de las manos para hacer sonar el piano:
