@@ -229,10 +229,39 @@ def filtro_sepia(frame):
     cv2.imshow('Filtro Sepia', sepia)
 ```
 
+Aqui se muestra unas imagenes para demostrar el funcionamiento del codigo:
+<div align="center">
+   <table>
+   <td width="50%">
+      <div align="center">
+         <img src="img/color.png"  width="400" alt="Imagen Color">
+      </div>                                                 
+   </td>
+   <td width="50%">
+      <div align="center">                                       
+         <img src="img/sepia.png" width="400" alt="Imagen Sepia">
+      </div>
+   </td>
+   </table>
+   <table>
+   <td width="50%">
+      <div align="center">
+         <img src="img/canny.png"  width="400" alt="Imagen Filtro Canny">
+      </div>                                                 
+   </td>
+   <td width="50%">
+      <div align="center">                                       
+         <img src="img/segmentacion_azul.png" width="400" alt="Imagen Segmentacion azul">
+      </div>
+   </td>
+   </table>
+</div>
+
+
+
 # Tarea 4 Reinterpretación de la parte de procesamiento de la imagen
 
 Después de ver el video de **Virtual Air Guitar**, decidimos reinterpretar la parte del procesamiento de imágenes creando un piano virtual en el aire. En este sistema, el usuario puede tocar el piano utilizando el movimiento de sus dedos. Para ello, comenzamos con un código base para la detección de manos [Medium MediaPipe](https://lvimuth.medium.com/hand-detection-in-python-using-opencv-and-mediapipe-30c7b54f5ff4) y, a partir de este punto, desarrollamos el resto de la funcionalidad necesaria para llevar a cabo la tarea.
-
 
 <div align="center">
    <img src="img/air_piano.png" width="420" height="240">
