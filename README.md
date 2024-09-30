@@ -47,16 +47,88 @@ Tras estos pasos debería poder ejecutar el proyecto localmente
 
 <h2 align="center">📋 Tareas</h2>
 
-### Tarea 1 Máximo filas y columnas de píxeles blancos 
+# Tarea 1 Máximo filas y columnas de píxeles blancos 
 
 TAREA: Realiza la cuenta de píxeles blancos por filas (en lugar de por columnas). Determina el máximo para filas y columnas (uno para cada) y muestra el número de filas con un número de píxeles blancos mayor o igual que 0.95*máximo.
 
+## Función Principal: CannyToRowPlot(canny, text)
+```python
+def CannyToRowPlot(canny):
+    # Cuenta el número de píxeles blancos (255) por fila, el 1 indica que es por filas. Primero los computa y después lo simplifica en un solo entero
+    row_counts = cv2.reduce(canny, 1, cv2.REDUCE_SUM, dtype=cv2.CV_32SC1)
+    """"
+    Notas ==> : implica que toma TODOS los valores (Al fin y al cabo es un array de arrays, toma el primer valor, y único, de cada array)
+                Se obtiene un array de longitud igual al alto, porque se evalúa por columnas. 
+                Cada valor representa el número de píxeles blancos por columnas.
+            
+    """
+    rows = row_counts[:, 0] / (255 * canny.shape[1])
 
-### Tarea 2 Umbralizado a la imagen de Sobel
+    # Determina el valor máximo de píxeles blancos por fila.
+    maxfil = np.max(rows)
 
-Aquí tienes una versión mejorada de la expresión y una respuesta que podrías dar:
+    # Encuentra las filas con un número de píxeles blancos mayor o igual que 0.95 * maxfil
+    threshold = 0.95 * maxfil
+    filas_con_maximos = np.where(rows >= threshold)[0] # Se toma el cero porque la función np.where() devuelve un objeto array con listas dentro.
 
----
+    # Muestra el resultado gráficamente
+    plt.figure()
+    plt.subplot(1, 2, 1)
+    plt.axis("off")
+    plt.title("Canny")
+    plt.imshow(canny, cmap='gray')
+
+    plt.subplot(1, 2, 2)
+    plt.title("Respuesta de Canny por filas")
+    plt.xlabel("Filas")
+    plt.ylabel("% píxeles")
+    plt.plot(rows)
+
+    plt.xlim([0, canny.shape[0]])
+
+    # Imprime los resultados
+    print(f"Valor máximo de píxeles blancos por fila: {maxfil}")
+    print(f"Número de filas con más del 95% del valor máximo: {len(filas_con_maximos)}")
+    print(f"Posiciones de las filas con más del 95% del valor máximo: {filas_con_maximos}")
+``` 
+Esta función recibe dos parámetros:
+
+   - canny: Una imagen binaria (generalmente una imagen resultante de la aplicación del algoritmo de Canny) que contiene píxeles blancos (255) que representan los bordes detectados.
+   - text: Un string que define el título de la imagen y el gráfico, permitiendo una descripción personalizada para cada ejecución.
+
+## Reducción de la imagen a valores por fila:
+   - Se calcula la suma de los valores de píxeles por cada fila de la imagen usando la función cv2.reduce. El resultado es un vector de valores que representa la cantidad total de píxeles blancos por fila.
+     
+## Normalización del valor de cada fila:
+   - El conteo de píxeles blancos se normaliza dividiendo entre el producto de 255 (valor de píxel blanco) y el número de columnas de la imagen, obteniendo así el porcentaje de píxeles blancos por cada fila de la        imagen.
+     
+## Detección de filas con máximo porcentaje de bordes:
+   - Se calcula el valor máximo de píxeles blancos en una fila (maxfil) y se establece un umbral del 95% de ese valor máximo.
+   - Se identifica las filas que tienen una proporción de píxeles blancos mayor o igual al 95% del valor máximo.
+    
+## Visualización:
+   - La función genera una gráfica utilizando matplotlib que muestra:
+   - La imagen original procesada por Canny (en una escala de grises).
+   - Un gráfico que muestra la distribución de píxeles blancos por cada fila.
+
+<div align="center">
+   <img src="outputTarea3.png" width="680" height="400">
+</div>
+
+## Salida:
+La función imprime en consola los siguientes valores:
+   - El valor máximo de píxeles blancos por fila (maxfil).
+   - El número de filas que contienen al menos el 95% del valor máximo de píxeles blancos.
+   - Las posiciones de estas filas en la imagen.
+
+```
+Ejemplo salida para la imagen del mandril:
+   - Valor máximo de píxeles blancos por fila: 0.4296875
+   - Número de filas con más del 95% del valor máximo: 2
+   - Posiciones de las filas con más del 95% del valor máximo: [ 12 100]
+```
+
+# Tarea 2 Umbralizado a la imagen de Sobel
 
 **Valor máximo de píxeles blancos por columna:** 0.59765625
 
@@ -111,12 +183,52 @@ sobel8 = np.uint8(sobel)
 res, imagenUmbralizada = cv2.threshold(sobel8, valorUmbral, 255, cv2.THRESH_BINARY)
 ```
 
-### Tarea 3 Demostrador que captura las imágenes de la cámara
+# Tarea 3 Demostrador que captura las imágenes de la cámara
 
 TAREA: Proponer un demostrador que capture las imágenes de la cámara, y les permita exhibir lo aprendido en estas dos prácticas ante quienes no cursen la asignatura :). Es por ello que además de poder mostrar la imagen original de la webcam, incluya al menos dos usos diferentes de aplicar las funciones de OpenCV trabajadas hasta ahora.
 
+## Funcionalidades
+El script ofrece cuatro modos de procesamiento de imágenes, cada uno activado mediante diferentes teclas del teclado:
 
-### Tarea 4 Reinterpretación de la parte de procesamiento de la imagen
+   - Modo Original (Tecla '0'): Muestra la imagen de la cámara sin modificaciones.
+```python
+def normal(frame):
+    cv2.imshow('Imagen original', frame)
+```
+   - Modo Canny (Tecla '1'): Aplica el filtro de detección de bordes de Canny.
+```python
+def NormalToCanny(frame):
+    canny = cv2.Canny(frame, 100, 400)
+    cv2.imshow('Imagen Canny', canny)
+```
+   - Modo de Segmentación de Color Azul (Tecla '2'): Detecta y mantiene el color azul en la imagen, mientras el resto se muestra en escala de grises.
+```python
+def segmentacion_color_azul(frame):
+    # Convertir la imagen de BGR a HSV
+    hsv, lower_blue, upper_blue = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV), np.array([100, 150, 50]), np.array([140, 255, 255])
+    
+    # Crear una máscara que detecte los píxeles dentro del rango del color azul,  
+    # es un array donde los valores que no se encuentren en el intervalo valen cero
+    mask = cv2.inRange(hsv, lower_blue, upper_blue)
+    
+    # Crear la imagen en escala de grises, podría tener color pero al haberla convertido primero a escala de grises se vería en blanco y negro
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    gray_colored = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
+    
+    # Combinar la imagen en color con la imagen en escala de grises usando la máscara
+    resultado = np.where(mask[:, :, np.newaxis] != 0, frame, gray_colored)
+    
+    cv2.imshow('Segmentacion de color (Azul)', resultado)
+```
+   - Modo Filtro Sepia (Tecla '3'): Aplica un filtro sepia, dando a la imagen un tono cálido estilo vintage.
+```python
+def filtro_sepia(frame):
+    sepia_filter = np.array([[0.272, 0.534, 0.131], [0.349, 0.686, 0.168], [0.393, 0.769, 0.189]])
+    sepia = cv2.transform(frame, sepia_filter)
+    cv2.imshow('Filtro Sepia', sepia)
+```
+
+# Tarea 4 Reinterpretación de la parte de procesamiento de la imagen
 
 Después de ver el video de **Virtual Air Guitar**, decidimos reinterpretar la parte del procesamiento de imágenes creando un piano virtual en el aire. En este sistema, el usuario puede tocar el piano utilizando el movimiento de sus dedos. Para ello, comenzamos con un código base para la detección de manos [Medium MediaPipe](https://lvimuth.medium.com/hand-detection-in-python-using-opencv-and-mediapipe-30c7b54f5ff4) y, a partir de este punto, desarrollamos el resto de la funcionalidad necesaria para llevar a cabo la tarea.
 
