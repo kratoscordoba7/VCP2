@@ -111,6 +111,10 @@ Esta función recibe dos parámetros:
    - La imagen original procesada por Canny (en una escala de grises).
    - Un gráfico que muestra la distribución de píxeles blancos por cada fila.
 
+<div align="center">
+   <img src="outputTarea3.png" width="680" height="400">
+</div>
+
 ## Salida:
 La función imprime en consola los siguientes valores:
    - El valor máximo de píxeles blancos por fila (maxfil).
@@ -187,6 +191,46 @@ res, imagenUmbralizada = cv2.threshold(sobel8, valorUmbral, 255, cv2.THRESH_BINA
 
 TAREA: Proponer un demostrador que capture las imágenes de la cámara, y les permita exhibir lo aprendido en estas dos prácticas ante quienes no cursen la asignatura :). Es por ello que además de poder mostrar la imagen original de la webcam, incluya al menos dos usos diferentes de aplicar las funciones de OpenCV trabajadas hasta ahora.
 
+## Funcionalidades
+El script ofrece cuatro modos de procesamiento de imágenes, cada uno activado mediante diferentes teclas del teclado:
+
+   - Modo Original (Tecla '0'): Muestra la imagen de la cámara sin modificaciones.
+```python
+def normal(frame):
+    cv2.imshow('Imagen original', frame)
+```
+   - Modo Canny (Tecla '1'): Aplica el filtro de detección de bordes de Canny.
+```python
+def NormalToCanny(frame):
+    canny = cv2.Canny(frame, 100, 400)
+    cv2.imshow('Imagen Canny', canny)
+```
+   - Modo de Segmentación de Color Azul (Tecla '2'): Detecta y mantiene el color azul en la imagen, mientras el resto se muestra en escala de grises.
+```python
+def segmentacion_color_azul(frame):
+    # Convertir la imagen de BGR a HSV
+    hsv, lower_blue, upper_blue = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV), np.array([100, 150, 50]), np.array([140, 255, 255])
+    
+    # Crear una máscara que detecte los píxeles dentro del rango del color azul,  
+    # es un array donde los valores que no se encuentren en el intervalo valen cero
+    mask = cv2.inRange(hsv, lower_blue, upper_blue)
+    
+    # Crear la imagen en escala de grises, podría tener color pero al haberla convertido primero a escala de grises se vería en blanco y negro
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    gray_colored = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
+    
+    # Combinar la imagen en color con la imagen en escala de grises usando la máscara
+    resultado = np.where(mask[:, :, np.newaxis] != 0, frame, gray_colored)
+    
+    cv2.imshow('Segmentacion de color (Azul)', resultado)
+```
+   - Modo Filtro Sepia (Tecla '3'): Aplica un filtro sepia, dando a la imagen un tono cálido estilo vintage.
+```python
+def filtro_sepia(frame):
+    sepia_filter = np.array([[0.272, 0.534, 0.131], [0.349, 0.686, 0.168], [0.393, 0.769, 0.189]])
+    sepia = cv2.transform(frame, sepia_filter)
+    cv2.imshow('Filtro Sepia', sepia)
+```
 
 # Tarea 4 Reinterpretación de la parte de procesamiento de la imagen
 
