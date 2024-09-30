@@ -113,7 +113,7 @@ Esta función recibe dos parámetros:
    - Un gráfico que muestra la distribución de píxeles blancos por cada fila.
 
 <div align="center">
-   <img src="outputTarea3.png" width="680" height="400">
+   <img src="outputTarea3.png" width="580" height="400">
 </div>
 
 ## Salida:
