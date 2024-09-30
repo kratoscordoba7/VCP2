@@ -202,7 +202,15 @@ def NormalToCanny(frame):
     canny = cv2.Canny(frame, 100, 400)
     cv2.imshow('Imagen Canny', canny)
 ```
+<div align="center">
+   <img src="img/Canny.png" width="680" height="400">
+</div>
    - Modo de Segmentación de Color Azul (Tecla '2'): Detecta y mantiene el color azul en la imagen, mientras el resto se muestra en escala de grises.
+<div align="center">
+   <img src="img/BotellaSegmentacion.png" width="680" height="400">
+   <img src="img/EstucheSegmentacion.png" width="680" height="400">
+</div>
+
 ```python
 def segmentacion_color_azul(frame):
     # Convertir la imagen de BGR a HSV
@@ -222,6 +230,10 @@ def segmentacion_color_azul(frame):
     cv2.imshow('Segmentacion de color (Azul)', resultado)
 ```
    - Modo Filtro Sepia (Tecla '3'): Aplica un filtro sepia, dando a la imagen un tono cálido estilo vintage.
+<div align="center">
+   <img src="img/SepiaSegmentacion.png" width="680" height="400">
+</div>
+
 ```python
 def filtro_sepia(frame):
     sepia_filter = np.array([[0.272, 0.534, 0.131], [0.349, 0.686, 0.168], [0.393, 0.769, 0.189]])
@@ -229,7 +241,7 @@ def filtro_sepia(frame):
     cv2.imshow('Filtro Sepia', sepia)
 ```
 
-Aqui se muestra unas imagenes para demostrar el funcionamiento del codigo:
+Aqui se muestran más imagenes que demuestran el funcionamiento del codigo:
 <div align="center">
    <table>
    <td width="50%">
