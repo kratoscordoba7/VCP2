@@ -130,10 +130,6 @@ Ejemplo salida para la imagen del mandril:
 
 # Tarea 2 Umbralizado a la imagen de Sobel
 
-Aquí tienes una versión mejorada de la expresión y una respuesta que podrías dar:
-
----
-
 **Valor máximo de píxeles blancos por columna:** 0.59765625
 
 **TAREA:** Se aplicó un umbralizado a la imagen resultante del filtro Sobel (convertida a 8 bits) y se realizó un conteo de píxeles no nulos por filas y columnas, similar al realizado con la salida de Canny. A continuación, se calcularon los valores máximos de conteo por filas y columnas, y se determinaron las filas y columnas que superan el 95% del valor máximo. Estas filas y columnas fueron resaltadas en la imagen utilizando primitivas gráficas.
