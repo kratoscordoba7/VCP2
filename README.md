@@ -152,6 +152,10 @@ Ejemplo salida para la imagen del mandril:
 <br>
 <br>
 
+> [!TIP]  
+> Como podemos observar, el filtro de Sobel junto con el umbralizado genera contornos más suaves y naturales en la imagen, mientras que el algoritmo de Canny destaca de manera más precisa detalles finos, como los pelos del mono. La detección con Canny es especialmente efectiva en imágenes o videos con pequeñas sombras, ya que resalta mejor las características sutiles. Además, un aspecto que podría mejorarse sería aplicar Sobel en direcciones diagonales, lo que permitiría una detección de bordes aún más destacada y resaltada.
+
+
 En el histograma superior, correspondiente al método Canny, se muestra la distribución de píxeles a lo largo de las filas y columnas de la imagen. Se puede notar que la cantidad de píxeles detectados por Canny en ambas dimensiones (filas en rojo y columnas en azul) presenta fluctuaciones, con algunos picos más pronunciados, lo que indica que Canny resalta bordes de mayor contraste a lo largo de toda la imagen.
 
 En el histograma inferior, correspondiente al método Sobel, los resultados muestran una menor cantidad de píxeles detectados, con una distribución más homogénea y una cantidad menor de fluctuaciones en comparación con el histograma de Canny. Esto sugiere que Sobel es más sensible a los cambios graduales en la intensidad de la imagen, pero no resalta bordes tan claramente como Canny. Tambien es debido a que aunque estamos aplicando sobel por filas y columnas, no estamos aplicandolo diagonalmente, lo que podria llegar a mejorar el resalte de bordes.
@@ -245,25 +249,29 @@ Aqui se muestran más imagenes que demuestran el funcionamiento del codigo:
 <div align="center">
    <table>
    <td width="50%">
+      <h3 align="center">Modo "0": Normal</h3>
       <div align="center">
          <img src="img/color.png"  width="400" alt="Imagen Color">
       </div>                                                 
    </td>
    <td width="50%">
+      <h3 align="center">Modo "1": Canny</h3>
       <div align="center">                                       
-         <img src="img/sepia.png" width="400" alt="Imagen Sepia">
+         <img src="img/canny.png" width="400" alt="Imagen canny">
       </div>
    </td>
    </table>
    <table>
    <td width="50%">
+      <h3 align="center">Modo "2": Segmentacion Azul</h3>
       <div align="center">
-         <img src="img/canny.png"  width="400" alt="Imagen Filtro Canny">
+         <img src="img/segmentacion_azul.png"  width="400" alt="Imagen Segmentacion azul">
       </div>                                                 
    </td>
    <td width="50%">
+      <h3 align="center">Modo "3": Sepia</h3>
       <div align="center">                                       
-         <img src="img/segmentacion_azul.png" width="400" alt="Imagen Segmentacion azul">
+         <img src="img/sepia.png" width="400" alt="Imagen Sepia">
       </div>
    </td>
    </table>
@@ -278,6 +286,10 @@ Después de ver el video de **Virtual Air Guitar**, decidimos reinterpretar la p
 <div align="center">
    <img src="img/air_piano.png" width="420" height="240">
 </div>
+
+> [!TIP]  
+> Como podemos observar, mediante la detección de la cámara es posible utilizar distintas zonas con OpenCV para simular y reproducir un piano real utilizando Pygame, Mediapipe y un toque de creatividad.
+
 
 A continuación, presentamos un pequeño fragmento del código responsable del control de las manos para hacer sonar el piano:
 
