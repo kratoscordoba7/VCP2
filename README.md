@@ -152,7 +152,9 @@ Ejemplo salida para la imagen del mandril:
 <br>
 <br>
 
-Al comparar los resultados obtenidos de las imágenes procesadas por Sobel y Canny, se observa que el método Canny produce un mayor número de filas y columnas con píxeles no nulos en comparación con Sobel. Además, los histogramas de Sobel muestran una distribución más homogénea en las filas y columnas, mientras que en Canny se evidencia una mayor disparidad en la distribución de los valores. Esta diferencia sugiere que Canny es más eficaz para resaltar características en la imagen, proporcionando un mayor contraste en la detección de bordes en comparación con Sobel.
+En el histograma superior, correspondiente al método Canny, se muestra la distribución de píxeles a lo largo de las filas y columnas de la imagen. Se puede notar que la cantidad de píxeles detectados por Canny en ambas dimensiones (filas en rojo y columnas en azul) presenta fluctuaciones, con algunos picos más pronunciados, lo que indica que Canny resalta bordes de mayor contraste a lo largo de toda la imagen.
+
+En el histograma inferior, correspondiente al método Sobel, los resultados muestran una menor cantidad de píxeles detectados, con una distribución más homogénea y una cantidad menor de fluctuaciones en comparación con el histograma de Canny. Esto sugiere que Sobel es más sensible a los cambios graduales en la intensidad de la imagen, pero no resalta bordes tan claramente como Canny. Tambien es debido a que aunque estamos aplicando sobel por filas y columnas, no estamos aplicandolo diagonalmente, lo que podria llegar a mejorar el resalte de bordes.
 
 <div align="center">
    <img src="img/grafico_sobel.png" width="620" height="440">
@@ -177,9 +179,7 @@ sobel = cv2.add(sobelx, sobely)
 # Definir el valor del umbral
 valorUmbral = 170
 
-# Convertir la imagen a 8 bits
-sobel8 = np.uint8(sobel)
-
+sobel8 = np.uint8(np.abs(sobel)) # Convertimos la imagen a 8 bits
 # Obtener la imagen umbralizada según el valor definido
 res, imagenUmbralizada = cv2.threshold(sobel8, valorUmbral, 255, cv2.THRESH_BINARY)
 ```
