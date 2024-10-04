@@ -319,7 +319,7 @@ if is_piano_posture(fingers):
 > Los archivos presentados aquí son una modificación de los archivos originales de [otsedom](https://github.com/otsedom/otsedom.github.io/tree/main/VC).
 
 > [!WARNING]  
-> Este codigo puede usarse sin problemas tampoco hay que preocuparse por el copyright de los sonidos del piano puesto que forman parte de [Freesound](https://freesound.org/) y la licencia
+> Este codigo puede usarse sin problemas, tampoco hay que preocuparse por el copyright de los sonidos del piano puesto que forman parte de [Freesound](https://freesound.org/) y la licencia
 > que tienen es de libre uso 'Creative Commons 0'
 
 
